@@ -24,7 +24,6 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {Navigation} from 'react-native-navigation';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -56,29 +55,11 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
-function App(props): React.JSX.Element {
+function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const nav = () => {
-    console.log('=========', props.componentId);
-
-    return Navigation.push(props.componentId, {
-      component: {
-        name: 'TestScreen', // Push the screen registered with the 'Settings' key
-        options: {
-          // Optional options object to configure the screen
-          topBar: {
-            title: {
-              text: 'Test', // Set the TopBar title of the new Screen
-            },
-          },
-        },
-      },
-    });
   };
 
   return (
@@ -95,9 +76,8 @@ function App(props): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Text onPress={nav}>GoToTest</Text>
           <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+            Edit <Text style={styles.highlight}>App.tsx1</Text> to change this
             screen and then come back to see your edits.
           </Section>
           <Section title="See Your Changes">
