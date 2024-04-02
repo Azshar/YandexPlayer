@@ -1,8 +1,18 @@
 import {Navigation} from 'react-native-navigation';
-import AppScreen from './App';
-import TestScreen from './Test';
-Navigation.registerComponent('HomeScreen', () => AppScreen);
-Navigation.registerComponent('TestScreen', () => TestScreen);
+import {Provider} from 'react-redux';
+
+import AppScreen from './src/screens/App';
+import store from './src/store/store';
+
+function WrappedScreen(Component) {
+  return props => (
+    <Provider store={store}>
+      <Component {...props} />
+    </Provider>
+  );
+}
+
+Navigation.registerComponent('HomeScreen', () => WrappedScreen(AppScreen));
 
 Navigation.events().registerAppLaunchedListener(async () => {
   await Navigation.setRoot({
@@ -12,6 +22,11 @@ Navigation.events().registerAppLaunchedListener(async () => {
           {
             component: {
               name: 'HomeScreen',
+              options: {
+                topBar: {
+                  visible: false,
+                },
+              },
             },
           },
         ],
